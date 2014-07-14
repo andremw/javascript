@@ -78,7 +78,7 @@
     ```javascript
     // bad
     var item = new Object();
-
+    
     // good
     var item = {};
     ```
@@ -363,7 +363,7 @@
     var superPower = new SuperPower();
     ```
 
-  - Use one `var` declaration for multiple variables and declare each variable on a newline.
+  - Use one `var` declaration for multiple variables and declare each variable on a newline, except when the variables have a long assignment statement.
 
     ```javascript
     // bad
@@ -375,6 +375,10 @@
     var items = getItems(),
         goSportsTeam = true,
         dragonball = 'z';
+        
+    // good
+    var items = Array.prototype.slice.call($('.wall > .bricks').find('.hole'));
+    var pictures = Array.prototype.slice.call($('.hall > .frame').find('picture'));
     ```
 
   - Declare unassigned variables last. This is helpful when later on you might need to assign a variable depending on one of the previous assigned variables.
@@ -591,6 +595,7 @@
     if (collection.length) {
       // ...stuff...
     }
+    
     ```
 
   - For more information see [Truth Equality and JavaScript](http://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll
@@ -722,12 +727,12 @@
 
 ## Whitespace
 
-  - Use soft tabs set to 2 spaces
+  - Use soft tabs set to 4 spaces
 
     ```javascript
     // bad
     function() {
-    ∙∙∙∙var name;
+    ∙∙var name;
     }
 
     // bad
@@ -737,7 +742,7 @@
 
     // good
     function() {
-    ∙∙var name;
+    ∙∙∙∙var name;
     }
     ```
 
@@ -746,6 +751,12 @@
     ```javascript
     // bad
     function test(){
+      console.log('test');
+    }
+    
+    // bad
+    function test()
+    {
       console.log('test');
     }
 
@@ -998,16 +1009,15 @@
 
     // bad
     var hasAge = new Boolean(age);
+    
+    // bad
+    var hasAge = !!age;
 
     // good
     var hasAge = Boolean(age);
-
-    // good
-    var hasAge = !!age;
     ```
 
 **[⬆ back to top](#table-of-contents)**
-
 
 ## Naming Conventions
 
@@ -1077,7 +1087,7 @@
     this._firstName = 'Panda';
     ```
 
-  - When saving a reference to `this` use `_this`.
+  - When saving a reference to `this` use `_this`. Also refer to idiomatic.js (https://github.com/rwaldron/idiomatic.js/#naming) to learn how to properly avoid saving a reference to `this`.
 
     ```javascript
     // bad
@@ -1105,21 +1115,22 @@
     }
     ```
 
-  - Name your functions. This is helpful for stack traces.
+  - Don't name your functions. Although it's good, we need to support IE8. For more info on this, check the note below.
 
     ```javascript
+    
     // bad
-    var log = function(msg) {
+    var log = function log(msg) {
       console.log(msg);
     };
-
-    // good
-    var log = function log(msg) {
+    
+    // god
+    var log = function(msg) {
       console.log(msg);
     };
     ```
 
-  - **Note:** IE8 and below exhibit some quirks with named function expressions.  See [http://kangax.github.io/nfe/](http://kangax.github.io/nfe/) for more info.
+  - **Note:** IE8 and below exhibit some quirks with named function expressions.  See [http://kangax.github.io/nfe/](http://kangax.github.io/nfe/) for more info. Because of this, we're not going to name function expressions.
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -1300,6 +1311,7 @@
   - The file should be named with camelCase, live in a folder with the same name, and match the name of the single export.
   - Add a method called `noConflict()` that sets the exported module to the previous version and returns this one.
   - Always declare `'use strict';` at the top of the module.
+  - We're also going to use idiomatic.js style on this subject (https://github.com/rwaldron/idiomatic.js/#practical)
 
     ```javascript
     // fancyInput/fancyInput.js
@@ -1383,6 +1395,12 @@
     // good
     $sidebar.find('ul').hide();
     ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Extending native object's prototype
+
+  - Don't. If you want to extend any native object's prototype, create a lib that can be reused.
 
 **[⬆ back to top](#table-of-contents)**
 
