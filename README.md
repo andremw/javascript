@@ -363,20 +363,14 @@
     var superPower = new SuperPower();
     ```
 
-  - Use one `var` declaration for multiple variables and declare each variable on a newline, except when the variables have a long assignment statement.
+  - Use one `var` declaration for each variable and declare them on a newline.
 
     ```javascript
-    // bad
+
+    // good
     var items = getItems();
     var goSportsTeam = true;
     var dragonball = 'z';
-
-    // good
-    var items = getItems(),
-        goSportsTeam = true,
-        dragonball = 'z';
-        
-    // good
     var items = Array.prototype.slice.call($('.wall > .bricks').find('.hole'));
     var pictures = Array.prototype.slice.call($('.hall > .frame').find('picture'));
     ```
@@ -612,7 +606,7 @@
     if (test)
       return false;
 
-    // good
+    // bad
     if (test) return false;
 
     // good
